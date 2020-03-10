@@ -60,12 +60,12 @@ def main_source(file, source):
         if os.path.isdir('../'+file.replace('.exe', '')+source) != True:
             os.mkdir('../'+file.replace('.exe', '')+source)
         with open('../'+file.replace('.exe', '')+source+'/'+file.replace('.exe', '')+'_source.py', "w") as fileobj:
-            uncompyle6.uncompyle_file(pycfile, fileobj)
+            uncompyle6.decompile_file(pycfile, fileobj)
     else:
         if os.path.isdir('../'+source) != True:
             os.mkdir('../'+source)
         with open('../'+source+'/'+source, "w") as fileobj:
-            uncompyle6.uncompyle_file(pycfile, fileobj)
+            uncompyle6.decompile_file(pycfile, fileobj)
     return file
 
 
@@ -85,7 +85,7 @@ def all_source(fi, source):
                 with open('PYZ-00.pyz_extracted/'+i, 'rb') as old:
                     new.write(binascii.unhexlify(binascii.hexlify(old.read())[24:]))
             with open('../'+file.replace('.exe', '')+source+'/libs/'+i.replace('.pyc', '.py'), "w", encoding='utf-8') as fileobj:
-                uncompyle6.uncompyle_file('../'+file.replace('.exe', '')+source+'/libs/'+i, fileobj)
+                uncompyle6.decompile_file('../'+file.replace('.exe', '')+source+'/libs/'+i, fileobj)
             os.remove('../'+file.replace('.exe', '')+source+'/libs/'+i)
             print('[+] Successfully decompiling {}'.format(i))
     else:
@@ -99,7 +99,7 @@ def all_source(fi, source):
                 with open('PYZ-00.pyz_extracted/'+i, 'rb') as old:
                     new.write(binascii.unhexlify(binascii.hexlify(old.read())[24:]))
             with open('../'+source+'/libs/'+i.replace('.pyc', '.py'), "w", encoding='utf-8') as fileobj:
-                uncompyle6.uncompyle_file('../'+source+'/libs/'+i, fileobj)
+                uncompyle6.decompile_file('../'+source+'/libs/'+i, fileobj)
             os.remove('../'+source+'/libs/'+i)
             print('[+] Successfully decompiling {}'.format(i))
 
